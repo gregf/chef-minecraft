@@ -29,7 +29,8 @@ Vagrant::Config.run do |config|
 
   config.vm.host_name = "minecraft-cookbook"
 
-  config.vm.box = "Debian-6.0.6"
+  config.vm.box = "opscode-ubuntu-12.04"
+  config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_chef-10.18.2.box"
 
   config.vm.network :hostonly, "33.33.33.10"
 
@@ -46,6 +47,7 @@ Vagrant::Config.run do |config|
       }
     }
     chef.run_list = [
+      "recipe[apt]",
       "recipe[minecraft]"
     ]
   end
