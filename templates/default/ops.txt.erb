@@ -1,6 +1,5 @@
 <% if node['minecraft']['ops'].length > 0 -%>
-<%   node['minecraft']['ops'].each do |device| -%>
-<%=    node['minecraft']['ops'] %>
+<%   node['minecraft']['ops'].each do |op| -%>
+<%=    op %>
 <%   end -%>
 <% end -%>
-

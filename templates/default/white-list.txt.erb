@@ -1,6 +1,5 @@
 <% if node['minecraft']['white-list-users'].length > 0 -%>
-<%   node['minecraft']['white-list-users'].each do |device| -%>
-<%=    node['minecraft']['white-list-users'] %>
+<%   node['minecraft']['white-list-users'].each do |user| -%>
+<%=    user %>
 <%   end -%>
 <% end -%>
-
