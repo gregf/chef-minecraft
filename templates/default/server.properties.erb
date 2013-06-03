@@ -1,24 +1,6 @@
-#Minecraft server properties
-#<%= Time.now.strftime("%a %b %T %Z %Y") %>
-allow-nether=<%= node['minecraft']['allow-nether'] %>
-level-name=<%= node['minecraft']['level-name'] %>
-enable-query=<%= node['minecraft']['enable-query'] %>
-allow-flight=<%= node['minecraft']['allow-flight'] %>
-server-port=<%= node['minecraft']['server-port'] %>
-level-type=<%= node['minecraft']['level-type'] %>
-enable-rcon=<%= node['minecraft']['rcon'] %>
-level-seed=<%= node['minecraft']['level-seed'] %>
-server-ip=<%= node['minecraft']['server-ip'] %>
-max-build-height=<%= node['minecraft']['max-build-height'] %>
-spawn-npcs=<%= node['minecraft']['spawn-npcs'] %>
-white-list=<%= node['minecraft']['white-list'] %>
-spawn-animals=<%= node['minecraft']['spawn-animals'] %>
-online-mode=<%= node['minecraft']['online-mode'] %>
-pvp=<%= node['minecraft']['pvp'] %>
-difficulty=<%= node['minecraft']['difficulty'] %>
-gamemode=<%= node['minecraft']['gamemode'] %>
-max-players=<%= node['minecraft']['max-players'] %>
-spawn-monsters=<%= node['minecraft']['spawn-monsters'] %>
-generate-structures=<%= node['minecraft']['generate-structures'] %>
-view-distance=<%= node['minecraft']['view-distance'] %>
-motd=<%= node['minecraft']['motd'] %>
+# Minecraft server properties
+# Generated at: <%= Time.now.strftime("%a %b %T %Z %Y") %>
+
+<% node['minecraft']['properties'].each do |key, value| -%>
+<%= "#{key}=#{value}" %>
+<% end -%>
