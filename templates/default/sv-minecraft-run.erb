@@ -1,4 +1,4 @@
 #!/bin/sh
 cd <%= node['minecraft']['install_dir'] %>
 exec 2>&1
-exec chpst -u <%= node['minecraft']['user'] %>:<%= node['minecraft']['user'] %> /usr/bin/java -server -Xincgc -Xms<%= node['minecraft']['xms']%> -Xmx<%= node['minecraft']['xmx'] %> -Djava.net.preferIPv4Stack=true -jar <%= node['minecraft']['jar'] %> nogui
+exec chpst -u <%= node['minecraft']['user'] %>:<%= node['minecraft']['user'] %> /usr/bin/java -server -Xincgc -Xms<%= node['minecraft']['xms']%> -Xmx<%= node['minecraft']['xmx'] %> -Djava.net.preferIPv4Stack=true -jar <%= node['minecraft']['jar_name'] %> nogui
