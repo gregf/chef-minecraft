@@ -48,7 +48,7 @@ remote_file minecraft_jar do
   checksum node['minecraft']['checksum']
   owner node['minecraft']['user']
   group node['minecraft']['user']
-  mode '0644'
+  mode 0644
   action :create_if_missing
 end
 
@@ -74,13 +74,27 @@ end
     group node['minecraft']['user']
     mode 0644
     action :create
-    notifies :restart, 'runit_service[minecraft]'
+    notifies :restart, 'service[minecraft]'
   end
 end
 
-runit_service "minecraft"
+case node['minecraft']['init_style']
+when "runit"
+  runit_service "minecraft"
 
-service 'minecraft' do
-  supports :status => true, :restart => true, :reload => true
-  reload_command "#{node['runit']['sv_bin']} hup #{node['runit']['service_dir']}/minecraft"
+  service 'minecraft' do
+    supports :status => true, :restart => true, :reload => true
+    reload_command "#{node['runit']['sv_bin']} hup #{node['runit']['service_dir']}/minecraft"
+  end
+when "mark2"
+  service 'minecraft' do
+    pattern "python /usr/local/bin/mark2"
+    start_command "sudo -u #{node['minecraft']['user']} mark2 start #{node['minecraft']['install_dir']}"
+    stop_command "sudo -u #{node['minecraft']['user']} mark2 stop #{node['minecraft']['install_dir']}"
+    restart_command "sudo -u #{node['minecraft']['user']} mark2 send ~restart"
+    reload_command "sudo -u #{node['minecraft']['user']} mark2 send ~reload"
+    supports :restart => true, :reload => true, :status => false
+   end
+
+  include_recipe "minecraft::mark2"
 end

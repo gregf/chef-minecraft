@@ -8,6 +8,7 @@ default['minecraft']['checksum']            = '99a7f4088226f5574ec47fa69fda47793
 default['minecraft']['xms']                 = '512M'
 default['minecraft']['xmx']                 = '512M'
 default['minecraft']['ipv6']                = false
+default['minecraft']['init_style']          = "runit"
 
 default['minecraft']['banned-ips']          = []
 default['minecraft']['banned-players']      = []
