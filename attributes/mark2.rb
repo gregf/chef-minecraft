@@ -20,5 +20,5 @@
 default['minecraft']['mark2']['properties'] = {}
 default['minecraft']['mark2']['plugin']     = {}
 
-default['minecraft']['mark2']['java']['cli.X.ms'] = node['minecraft']['xms']
-default['minecraft']['mark2']['java']['cli.X.mx'] = node['minecraft']['xmx']
+default['minecraft']['mark2']['properties']['java']['cli.X.ms'] = node['minecraft']['xms']
+default['minecraft']['mark2']['properties']['java']['cli.X.mx'] = node['minecraft']['xmx']
