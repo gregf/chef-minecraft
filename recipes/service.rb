@@ -28,7 +28,6 @@ when 'runit'
   end
 when 'mark2'
   include_recipe 'minecraft::mark2'
-  include_recipe 'sudo'
   service 'minecraft' do
     pattern 'python /usr/local/bin/mark2'
     start_command "sudo -u #{node['minecraft']['user']} mark2 start #{node['minecraft']['install_dir']}"

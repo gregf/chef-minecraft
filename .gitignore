@@ -2,3 +2,6 @@
 .kitchen.local.yml
 *.lock
 tmp/
+.vagrant
+Vagrantfile
+.deps
