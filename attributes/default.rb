@@ -19,19 +19,20 @@
 
 default['minecraft']['user']                = 'mcserver'
 default['minecraft']['group']               = 'mcserver'
-default['minecraft']['install_dir']         = '/srv/minecraft'
 # Currently vanilla, bukkit, spigot
 default['minecraft']['install_type']        = 'vanilla'
 
-default['java']['install_flavor']           = 'default'
+default['java']['install_flavor']           = 'openjdk'
 
 case node['minecraft']['install_type']
 when 'vanilla'
-  default['minecraft']['url']                 = 'https://s3.amazonaws.com/Minecraft.Download/versions/1.8.1/minecraft_server.1.8.1.jar'
+  default['minecraft']['version']             = '1.8.1'
+  default['minecraft']['url']                 = "https://s3.amazonaws.com/Minecraft.Download/versions/#{node['minecraft']['version']}/minecraft_server.#{node['minecraft']['version']}.jar"
   default['minecraft']['checksum']            = 'ef5f5a1a1a78087859b18153acf97efc6ecb12540ac08d82b9c95024249b9845'
   default['minecraft']['server_opts']         = 'nogui'
 when 'bukkit'
-  default['minecraft']['url']                 = 'http://dl.bukkit.org/downloads/craftbukkit/get/02389_1.6.4-R2.0/craftbukkit.jar'
+  default['minecraft']['version']             = '1.6.4'
+  default['minecraft']['url']                 = "http://dl.bukkit.org/downloads/craftbukkit/get/02389_#{node['minecraft']['version']}-R2.0/craftbukkit.jar"
   default['minecraft']['checksum']            = '29c26ec69dcaf8c1214f90f5fa5609fc451aae5fe0d22fd4ce37a505684545b3'
   default['minecraft']['server_opts']         = '--noconsole --online-mode true'
 when 'spigot'
@@ -41,21 +42,34 @@ when 'spigot'
 end
 
 # Defaults to 40% of your total memory.
-default['minecraft']['xms']                 = "#{(node['memory']['total'].to_i * 0.4).floor / 1024}M"
+default['minecraft']['xms']                 = "#{(total_memory * 0.4).floor / 1024}M"
 # Defaults to 60% of your total memory.
-default['minecraft']['xmx']                 = "#{(node['memory']['total'].to_i * 0.6).floor / 1024}M"
+default['minecraft']['xmx']                 = "#{(total_memory * 0.6).floor / 1024}M"
 
 # Additional options to be passed to java, for runit only
 default['minecraft']['java-options']        = ''
-default['minecraft']['init_style']          = 'runit'
 
-default['minecraft']['ops']                 = []
-default['minecraft']['banned-ips']          = []
-default['minecraft']['banned-players']      = []
-default['minecraft']['white-list']          = []
+minecraft_server_files.each do |file|
+  default['minecraft'][file]                 = []
+end
 
 # Stop minecraft from binding to ipv6 by default
 default['minecraft']['prefer_ipv4'] = true
 
 # See the readme for an explanation
 default['minecraft']['autorestart'] = true
+
+case node['platform_family']
+when 'windows'
+  # Prevent errors from installing chocolatey on first run until the
+  # chocolatey cookbook is fixed to handle recent chocolatey changes
+  default['chocolatey']['upgrade'] = false
+  default['chocolatey']['Uri'] = 'https://chocolatey.org/Install-LastPoshClient.ps1'
+
+  default['minecraft']['init_style']          = 'windows_task'
+  default['minecraft']['install_dir']         = "#{ENV['programdata']}/minecraft"
+  default['minecraft']['user_password']       = 'Pass@word1'
+else
+  default['minecraft']['init_style']          = 'runit'
+  default['minecraft']['install_dir']         = '/srv/minecraft'
+end

@@ -17,13 +17,32 @@
 # limitations under the License.
 #
 
-group node['minecraft']['group']
+group node['minecraft']['group'] unless node['platform_family'] == 'windows'
 
 user node['minecraft']['user'] do
   system true
   comment 'Minecraft Server'
   home node['minecraft']['install_dir']
-  gid node['minecraft']['group']
   shell '/bin/false'
+  if node['minecraft']['user_password']
+    password node['minecraft']['user_password']
+  end
+  gid node['minecraft']['group'] if node['platform_family'] != 'windows'
   action :create
+end
+
+if node['platform_family'] == 'windows'
+  template "#{ENV['temp']}/LsaWrapper.ps1" do
+    source 'LsaWrapper.ps1.erb'
+    owner node['minecraft']['user']
+    action :create
+  end
+
+  powershell_script 'Add Log on as a batch job to mcserver user' do
+    code <<-EOS
+      . #{ENV['temp']}/LsaWrapper.ps1
+      $lsa_wrapper = New-Object -type LsaWrapper
+      $lsa_wrapper.SetRight("#{node['minecraft']['user']}", "SeBatchLogonRight")
+    EOS
+  end
 end

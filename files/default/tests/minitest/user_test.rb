@@ -4,8 +4,10 @@ require 'minitest/spec'
 ## Spec:: user
 
 describe_recipe 'minecraft::user' do
+  let(:is_windows) { node['platform_family'] == 'windows' }
+
   it 'ensures minecraft group exists' do
-    group(node['minecraft']['group']).must_exist
+    group(node['minecraft']['group']).must_exist unless is_windows
   end
 
   it 'ensures minecraft user exists' do

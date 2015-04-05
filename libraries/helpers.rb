@@ -16,8 +16,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+def minecraft_file_format
+  uses_json ? 'json' : 'txt'
+end
+
+def minecraft_server_files
+  if uses_json
+    %w(ops banned-ips banned-players whitelist)
+  else
+    %w(ops banned-ips banned-players white-list)
+  end
+end
+
+def uses_json
+  node['minecraft']['version'] && node['minecraft']['version'] >= '1.7.9'
+end
+
 def minecraft_file(uri)
   require 'pathname'
   require 'uri'
   Pathname.new(URI.parse(uri).path).basename.to_s
+end
+
+def total_memory
+  if node['platform_family'] == 'windows'
+    wmi = ::WIN32OLE.connect('winmgmts://')
+    res = wmi.ExecQuery('select Capacity from Win32_PhysicalMemory')
+    mem = res.each.next.capacity
+    mem.to_i / 1024
+  else
+    node['memory']['total'].to_i
+  end
 end

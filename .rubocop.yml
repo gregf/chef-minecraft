@@ -4,6 +4,7 @@ AllCops:
     - cookbooks/**/*
     - tmp/**/*
     - vendor/**/*
+    - .kitchen/**/*
 
 AlignParameters:
   Enabled: false

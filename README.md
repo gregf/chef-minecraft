@@ -25,6 +25,7 @@ Tested on chef 11
 * Debian 6+
 * Ubuntu 12.04+
 * Centos 6.4+
+* Windows 8/2012 (may work on previous versions)
 
 ## Recipes
 
@@ -49,12 +50,14 @@ The service recipe enables the runit service for minecraft.
 
 * `minecraft['group']`
   - The group the minecraft server runs under, default `mcserver`
+  - Not applicable to windows
 
 * `minecraft['install_dir']`
-  - The default location minecraft is installed to, default `/srv/minecraft`
+  - The default location minecraft is installed to, default `/srv/minecraft` (`%ProgramData%\minecraft` on windows)
 
 * `minecraft['install_type']`
   - Supports 'vanilla' and 'bukkit', default 'vanilla'
+  - Only 'vanilla' is currently supported on windows
 
 * `minecraft['url']`
   - The url to fetch minecarft releases from, default `https://s3.amazonaws.com/Minecraft.Download/versions`
@@ -72,7 +75,7 @@ The service recipe enables the runit service for minecraft.
   - You can use this to pass additional options to java, default blank
 
 * `minecraft['init_style']`
-  - Currently only runit is support. default `runit`
+  - Currently only `runit` is support on linux and `windows_task` on windows
 
 * `minecraft['banned-ips']`
   - An array of ips you would like banned, default blank

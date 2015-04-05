@@ -1,0 +1,2 @@
+cd "<%= node['minecraft']['install_dir'] %>"
+cmd /c "%JAVA_HOME%\bin\java.exe" -Xmx<%= node['minecraft']['xmx'] %> -Xms<%= node['minecraft']['xms'] %> -jar <%= @jar %> <%= node['minecraft']['server_opts'] %>

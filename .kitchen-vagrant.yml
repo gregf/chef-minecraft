@@ -1,0 +1,29 @@
+driver_plugin: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+- name: windows-2012R2
+  driver_config:
+    box_url: https://wrock.blob.core.windows.net/vhds/vbox2012r2.box
+    communicator: winrm
+    vm_hostname: false
+  transport:
+    name: winrm
+    port: 55985
+
+- name: ubuntu-12.04
+  run_list:
+  - recipe[ubuntu]
+  driver_config:
+    box: hashicorp/precise64
+
+suites:
+- name: default
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[minecraft]
+  attributes:
+    minecraft:
+      accept_eula: true

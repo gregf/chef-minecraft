@@ -17,11 +17,8 @@
 # limitations under the License.
 #
 
-include_recipe "java::#{node['java']['install_flavor']}"
-include_recipe 'runit'
+include_recipe 'minecraft::java'
 include_recipe 'minecraft::user'
-
-jar_name = minecraft_file(node['minecraft']['url'])
 
 directory node['minecraft']['install_dir'] do
   recursive true
@@ -30,6 +27,8 @@ directory node['minecraft']['install_dir'] do
   mode 0755
   action :create
 end
+
+jar_name = minecraft_file(node['minecraft']['url'])
 
 remote_file "#{node['minecraft']['install_dir']}/#{jar_name}" do
   source node['minecraft']['url']
@@ -48,17 +47,17 @@ template "#{node['minecraft']['install_dir']}/server.properties" do
   group node['minecraft']['group']
   mode 0644
   action :create
-  notifies :restart, 'runit_service[minecraft]', :delayed if node['minecraft']['autorestart']
+  notifies :restart, node['minecraft']['notify_resource'], :delayed if node['minecraft']['autorestart']
 end
 
-%w(ops banned-ips banned-players white-list).each do |f|
-  file "#{node['minecraft']['install_dir']}/#{f}.txt" do
+minecraft_server_files.each do |f|
+  file "#{node['minecraft']['install_dir']}/#{f}.#{minecraft_file_format}" do
     owner node['minecraft']['user']
     group node['minecraft']['group']
     mode 0644
     action :create
     content node['minecraft'][f].join("\n") + "\n"
-    notifies :restart, 'runit_service[minecraft]', :delayed if node['minecraft']['autorestart']
+    notifies :restart, node['minecraft']['notify_resource'], :delayed if node['minecraft']['autorestart']
   end
 end
 
@@ -66,5 +65,5 @@ file "#{node['minecraft']['install_dir']}/eula.txt" do
   content "eula=#{node['minecraft']['accept_eula']}\n"
   mode 0644
   action :create
-  notifies :restart, 'runit_service[minecraft]', :delayed if node['minecraft']['autorestart']
+  notifies :restart, node['minecraft']['notify_resource'], :delayed if node['minecraft']['autorestart']
 end
