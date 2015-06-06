@@ -11,7 +11,7 @@ describe 'minecraft::default' do
         node.automatic['memory']['total'] = '2097152kB'
       end.converge(described_recipe)
     end
-    let(:minecraft_jar) { '/srv/minecraft/minecraft_server.1.8.1.jar' }
+    let(:minecraft_jar) { '/srv/minecraft/minecraft_server.1.8.7.jar' }
 
     it 'includes default java recipe' do
       expect(chef_run).to include_recipe('java::default')
