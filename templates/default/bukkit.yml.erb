@@ -1,6 +1,0 @@
-# This is the main configuration file for Bukkit.
-# As you can see, there's actually not that much to configure without any plugins.
-# For a reference for any variable inside this file, check out the bukkit wiki at
-# http://wiki.bukkit.org/Bukkit.yml
-
-<%= node['minecraft']['bukkit']['config'].to_yaml(:SortKeys => true).split("\n").map{|l| l.gsub(/ \!ruby.*$/, "").gsub(/---/, "")}.join("\n") %>
