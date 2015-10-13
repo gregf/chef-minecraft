@@ -30,5 +30,5 @@ end
 
 describe process('java') do
   its(:user) { should eq 'mcserver' }
-  its(:args) { should match /-Xms198M -Xmx298M -Djava.net.preferIPv4Stack=true -jar\b/ }
+  its(:args) { should match(/-Xms198M -Xmx298M -Djava.net.preferIPv4Stack=true -jar\b/i) }
 end
