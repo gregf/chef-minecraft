@@ -1,7 +1,6 @@
-source 'http://api.berkshelf.com'
+source 'https://supermarket.chef.io'
 
 metadata
 
 cookbook 'ubuntu'
-cookbook 'minitest-handler'
-cookbook 'minecraft-test', path: 'test/integration/cookbooks/minecraft-test'
+cookbook 'minecraft-test', path: 'test/fixtures/cookbooks/minecraft-test'

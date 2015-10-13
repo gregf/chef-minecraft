@@ -21,6 +21,7 @@
 case node['minecraft']['init_style']
 when 'runit'
   runit_service 'minecraft' do
+    sv_bin 'sleep 5 && /usr/bin/sv'
     options({
       :install_dir => node['minecraft']['install_dir'],
       :xms         => node['minecraft']['xms'],

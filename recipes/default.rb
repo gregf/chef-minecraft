@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "java::#{node['java']['install_flavor']}"
+include_recipe 'java'
 include_recipe 'runit'
 include_recipe 'minecraft::user'
 
