@@ -14,7 +14,7 @@ describe file('/srv/minecraft') do
   it { should be_owned_by 'mcserver' }
 end
 
-describe file('/srv/minecraft/minecraft_server.1.8.1.jar') do
+describe file('/srv/minecraft/minecraft_server.1.8.8.jar') do
   it { should be_file }
   it { should be_mode 644 }
   it { should be_owned_by 'mcserver' }

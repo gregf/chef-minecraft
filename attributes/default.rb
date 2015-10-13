@@ -21,8 +21,8 @@ default['minecraft']['user']                = 'mcserver'
 default['minecraft']['group']               = 'mcserver'
 default['minecraft']['install_dir']         = '/srv/minecraft'
 
-default['minecraft']['url']                 = 'https://s3.amazonaws.com/Minecraft.Download/versions/1.8.1/minecraft_server.1.8.1.jar'
-default['minecraft']['checksum']            = 'ef5f5a1a1a78087859b18153acf97efc6ecb12540ac08d82b9c95024249b9845'
+default['minecraft']['url']                 = 'https://s3.amazonaws.com/Minecraft.Download/versions/1.8.8/minecraft_server.1.8.8.jar'
+default['minecraft']['checksum']            = '39aef720dc5309476f56f2e96a516f3dd3041bbbf442cbfd47d63acbd06af31e'
 default['minecraft']['server_opts']         = 'nogui'
 
 # Defaults to 40% of your total memory.
