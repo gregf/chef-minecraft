@@ -1,1 +1,0 @@
-<%= node['minecraft']['bukkit']['permissions'].to_yaml(:SortKeys => true).split("\n").map{|l| l.gsub(/ \!ruby.*$/, "").gsub(/---/, "")}.join("\n") %>

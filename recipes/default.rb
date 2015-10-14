@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "java::#{node['java']['install_flavor']}"
+include_recipe 'java'
 include_recipe 'runit'
 include_recipe 'minecraft::user'
 
@@ -41,7 +41,7 @@ remote_file "#{node['minecraft']['install_dir']}/#{jar_name}" do
 end
 
 include_recipe 'minecraft::service'
-include_recipe "minecraft::#{node['minecraft']['install_type']}"
+include_recipe 'minecraft::vanilla'
 
 template "#{node['minecraft']['install_dir']}/server.properties" do
   owner node['minecraft']['user']

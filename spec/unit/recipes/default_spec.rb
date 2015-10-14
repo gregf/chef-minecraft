@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'minecraft::default' do
   context 'install minecraft defaults' do
     let(:chef_run) do
-      ChefSpec::Runner.new(:platform => 'debian', :version  => '7.0') do |node|
+      ChefSpec::SoloRunner.new(:platform => 'debian', :version => '7.0') do |node|
         node.set['minecraft']['ops'] = %w(gregf sandal82)
         node.set['minecraft']['banned-ips'] = %w(10.1.2.3 10.1.100.10)
         node.set['minecraft']['banned-players'] = %w(gregf sandal82)
@@ -11,7 +11,7 @@ describe 'minecraft::default' do
         node.automatic['memory']['total'] = '2097152kB'
       end.converge(described_recipe)
     end
-    let(:minecraft_jar) { '/srv/minecraft/minecraft_server.1.8.1.jar' }
+    let(:minecraft_jar) { '/srv/minecraft/minecraft_server.1.8.8.jar' }
 
     it 'includes default java recipe' do
       expect(chef_run).to include_recipe('java::default')
