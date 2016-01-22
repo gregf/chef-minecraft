@@ -3,7 +3,9 @@
 # is very against the license.  That said - maybe let people add a dropbox URL as a node attribute,
 # as a convenience for installing if someone's already done the  build?
 
-jar_name = minecraft_file(node['spigot_buildtools']['url'])
+jar_name = "BuildTools.jar"
+
+# jar_name = minecraft_file(node['spigot_buildtools']['url'])
 
 directory node['spigot']['build_dir'] do
   recursive true
