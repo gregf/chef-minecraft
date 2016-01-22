@@ -35,8 +35,8 @@ end
 
 execute 'build spigot and craftbukkit' do
   cwd node['spigot']['build_dir']
-  command 'java -jar BuildTools.jar'
-  creates "#{node['spigot']['build_dir']}/spigot.jar"
+  command 'java -jar BuildTools.jar --rev 1.8.8'
+  creates "#{node['spigot']['build_dir']}/spigot-1.8.8.jar"
   not_if do ::File.exists?("#{node['spigot']['build_dir']}/spigot.jar") end 
 end
 
