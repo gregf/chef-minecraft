@@ -17,7 +17,7 @@ end
 
 remote_file "#{node['spigot']['build_dir']}/#{jar_name}" do
   source node['spigot']['buildtools_url']
-  checksum node['spigot']['buildtools_checksum']
+  #checksum node['spigot']['buildtools_checksum']
   owner node['minecraft']['user']
   group node['minecraft']['group']
   mode 0644
