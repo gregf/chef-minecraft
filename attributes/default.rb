@@ -30,18 +30,14 @@ when 'vanilla'
   default['minecraft']['checksum']            = '39aef720dc5309476f56f2e96a516f3dd3041bbbf442cbfd47d63acbd06af31e'
   default['minecraft']['server_opts']         = 'nogui'
 when 'bukkit'
-  default['minecraft']['url']                 = 'http://dl.bukkit.org/downloads/craftbukkit/get/02389_1.6.4-R2.0/craftbukkit.jar'
-  default['minecraft']['checksum']            = '29c26ec69dcaf8c1214f90f5fa5609fc451aae5fe0d22fd4ce37a505684545b3'
+  default['minecraft']['url']                 = '/srv/spigot_build/craftbukkit-1.8.8.jar'
+  default['minecraft']['checksum']            = ''
   default['minecraft']['server_opts']         = '--noconsole --online-mode true'
 when 'spigot'
-  default['minecraft']['url']                 = 'http://ci.md-5.net/view/Spigot/job/Spigot/lastStableBuild/artifact/Spigot-Server/target/spigot.jar'
-  default['minecraft']['checksum']            = '13abb884cb8f1bc8dfcd110fa3616f03b7ec5e23eb4b2e903b054c0ad23c4ac5'
+  default['minecraft']['url']                 = '/srv/spigot_build/spigot-1.8.8.jar'
+  default['minecraft']['checksum']            = ''
   default['minecraft']['server_opts']         = ''
 end
-
-default['minecraft']['url']                 = 'https://s3.amazonaws.com/Minecraft.Download/versions/1.8.8/minecraft_server.1.8.8.jar'
-default['minecraft']['checksum']            = '39aef720dc5309476f56f2e96a516f3dd3041bbbf442cbfd47d63acbd06af31e'
-default['minecraft']['server_opts']         = 'nogui'
 
 # Defaults to 40% of your total memory.
 default['minecraft']['xms']                 = "#{(node['memory']['total'].to_i * 0.4).floor / 1024}M"
