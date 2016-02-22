@@ -27,3 +27,5 @@ template "#{node['minecraft']['install_dir']}/spigot.yml" do
   notifies :restart, 'runit_service[minecraft]', :delayed if node['minecraft']['autorestart']
 end
 
+minecraft_plugin 'http://dev.bukkit.org/media/files/880/435/worldedit-bukkit-6.1.jar'
+
