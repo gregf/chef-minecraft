@@ -42,7 +42,7 @@ end
 
 remote_file "#{node['minecraft']['install_dir']}/#{jar_name}" do
   source node['minecraft']['url']
-  checksum node['minecraft']['checksum']
+  # checksum node['minecraft']['checksum']
   owner node['minecraft']['user']
   group node['minecraft']['group']
   mode 0644
