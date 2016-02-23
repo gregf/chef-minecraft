@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: minecraft
-# Recipe:: default
+# Recipe:: spigot
 #
 # Copyright 2013, Greg Fitzgerald
 #
@@ -27,5 +27,5 @@ template "#{node['minecraft']['install_dir']}/spigot.yml" do
   notifies :restart, 'runit_service[minecraft]', :delayed if node['minecraft']['autorestart']
 end
 
-minecraft_plugin 'http://dev.bukkit.org/media/files/880/435/worldedit-bukkit-6.1.jar'
+# minecraft_plugin 'http://dev.bukkit.org/media/files/880/435/worldedit-bukkit-6.1.jar'
 
