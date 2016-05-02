@@ -23,7 +23,7 @@ default['minecraft']['install_dir']         = '/srv/minecraft'
 
 # Currently vanilla, bukkit, spigot
 default['minecraft']['install_type']        = 'vanilla'
-  
+
 case node['minecraft']['install_type']
 when 'vanilla'
   default['minecraft']['url']                 = 'https://s3.amazonaws.com/Minecraft.Download/versions/1.8.8/minecraft_server.1.8.8.jar'

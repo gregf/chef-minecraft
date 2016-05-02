@@ -57,4 +57,3 @@ action :remove do
   end
   new_resource.updated_by_last_action(f.updated_by_last_action?)
 end
-

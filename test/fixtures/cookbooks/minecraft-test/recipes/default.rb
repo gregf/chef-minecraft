@@ -12,4 +12,3 @@ minecraft_plugin 'AutoBackup' do
   url 'http://dev.bukkit.org/media/files/778/990/AutoBackup.jar'
   action :remove
 end
-

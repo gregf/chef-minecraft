@@ -57,4 +57,3 @@ end
 
 default['minecraft']['bukkit']['help'] = {}
 default['minecraft']['bukkit']['permissions'] = {}
-

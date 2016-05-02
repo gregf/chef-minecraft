@@ -15,5 +15,9 @@ describe 'minecraft::user' do
         home: '/srv/minecraft'
       )
     end
+
+    it 'creates a group' do
+      expect(chef_run).to create_group('mcserver')
+    end
   end
 end

@@ -38,6 +38,19 @@ describe 'minecraft::default' do
       )
     end
 
+    before(:each) do
+      allow(File).to receive(:exists?).with(anything).and_call_original
+      allow(File).to receive(:exists?).with('/srv/minecraft/spigot-1.8.8.jar').and_return true
+      allow(IO).to receive(:read).with(anything).and_call_original
+      allow(IO).to receive(:read).with('/srv/minecraft/spigot-1.8.8.jar').and_return 'file content'
+    end
+
+    it 'uses remote_file to install the server jar of our choice' do
+      expect(chef_run).to create_remote_file_if_missing('/srv/minecraft/minecraft_server.1.8.8.jar')
+      # expect(chef_run).to create_if_missing('/srv/minecraft/spigot-1.8.8.jar')
+      # expect(chef_run).to create_if_missing('/srv/minecraft/craftbukkit-1.8.8.jar')
+    end
+
     context 'renders the server.properties template' do
       let(:template) { chef_run.template('/srv/minecraft/server.properties') }
 
@@ -120,6 +133,18 @@ describe 'minecraft::default' do
 
       it 'has 0644 permissions' do
         expect(white_list.mode).to eq(0644)
+      end
+    end
+
+    context 'creates eula.txt' do
+      let(:eula) { chef_run.file('/srv/minecraft/eula.txt') }
+
+      it 'creates eula.txt' do
+        expect(chef_run).to create_file(eula.path)
+      end
+
+      it 'has 0644 permissions' do
+        expect(eula.mode).to eq(0644)
       end
     end
 

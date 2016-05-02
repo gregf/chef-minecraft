@@ -3,7 +3,7 @@
 # is very against the license.  That said - maybe let people add a dropbox URL as a node attribute,
 # as a convenience for installing if someone's already done the  build?
 
-jar_name = "BuildTools.jar"
+jar_name = 'BuildTools.jar'
 
 # jar_name = minecraft_file(node['spigot_buildtools']['url'])
 
@@ -17,7 +17,7 @@ end
 
 remote_file "#{node['spigot']['build_dir']}/#{jar_name}" do
   source node['spigot']['buildtools_url']
-  #checksum node['spigot']['buildtools_checksum']
+  # checksum node['spigot']['buildtools_checksum']
   owner node['minecraft']['user']
   group node['minecraft']['group']
   mode 0644
@@ -37,7 +37,6 @@ execute 'build spigot and craftbukkit' do
   cwd node['spigot']['build_dir']
   command 'java -jar BuildTools.jar --rev 1.8.8'
   creates "#{node['spigot']['build_dir']}/spigot-1.8.8.jar"
-  not_if do ::File.exists?("#{node['spigot']['build_dir']}/spigot.jar") end
+  creates "#{node['spigot']['build_dir']}/craftbukkit-1.8.8.jar"
+  not_if { ::File.exist?("#{node['spigot']['build_dir']}/spigot-1.8.8.jar") }
 end
-
-

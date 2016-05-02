@@ -28,4 +28,3 @@ describe 'minecraft::default' do
     end
   end
 end
-

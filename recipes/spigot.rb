@@ -28,4 +28,3 @@ template "#{node['minecraft']['install_dir']}/spigot.yml" do
 end
 
 # minecraft_plugin 'http://dev.bukkit.org/media/files/880/435/worldedit-bukkit-6.1.jar'
-

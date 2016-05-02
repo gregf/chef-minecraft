@@ -20,4 +20,3 @@ default_action :install
 attribute :url, :kind_of => String, :name_attribute => true
 attribute :checksum, :regex => /^[a-zA-Z0-9]{64}$/, :default => nil
 attribute :update, :kind_of => [TrueClass, FalseClass], :default => false
-

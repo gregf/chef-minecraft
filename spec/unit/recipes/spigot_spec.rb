@@ -15,7 +15,7 @@ describe 'minecraft::default' do
     end
 
     context 'renders the spigot.yml template' do
-      let(:template) { spigot_run.template('/srv/minecraft/bukkit.yml') }
+      let(:template) { spigot_run.template('/srv/minecraft/spigot.yml') }
 
       it 'renders the template' do
         expect(spigot_run).to render_file(template.path).with_content('settings:')
@@ -32,4 +32,3 @@ describe 'minecraft::default' do
     end
   end
 end
-

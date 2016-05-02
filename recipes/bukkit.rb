@@ -28,4 +28,3 @@ include_recipe 'minecraft::build'
     notifies :restart, 'runit_service[minecraft]', :delayed if node['minecraft']['autorestart']
   end
 end
-

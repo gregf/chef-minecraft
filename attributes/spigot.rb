@@ -17,17 +17,15 @@
 # limitations under the License.
 #
 
-
 # The following four options are what it takes to build and install spigot properly.
 
-default['spigot']['build_dir']         = '/srv/spigot_build'
-default['spigot']['buildtools_url']         = 'https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar'
-default['spigot']['buildtools_checksum']            = ''
+default['spigot']['build_dir'] = '/srv/spigot_build'
+default['spigot']['buildtools_url'] = 'https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar'
+default['spigot']['buildtools_checksum'] = ''
 default['spigot']['install_dir'] = '/srv/minecraft'
 
-
 # The following are all the config bits that came from the old spigot config.
-# 
+#
 default['minecraft']['spigot']['config'].tap do |spigot_config|
   spigot_config['config-version'] = 5
   spigot_config['commands'].tap do |commands|
@@ -111,4 +109,3 @@ default['minecraft']['spigot']['config'].tap do |spigot_config|
     world_settings['zombie-aggressive-towards-villager'] = true
   end
 end
-
