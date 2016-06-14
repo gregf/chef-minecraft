@@ -9,6 +9,7 @@ name              'minecraft'
 recipe 'minecraft', 'Installs and configures minecraft server.'
 
 depends 'git'
+depends 'php'
 
 %w(java runit ohai apt yum).each do |dep|
   depends dep
