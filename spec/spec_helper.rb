@@ -14,4 +14,6 @@ RSpec.configure do |config|
   # :focus support to allow zooming in a single test/block
   config.filter_run :focus => true
   config.run_all_when_everything_filtered = true
+
+  at_exit { ChefSpec::Coverage.report! }
 end

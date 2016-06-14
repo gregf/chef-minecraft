@@ -21,9 +21,23 @@ default['minecraft']['user']                = 'mcserver'
 default['minecraft']['group']               = 'mcserver'
 default['minecraft']['install_dir']         = '/srv/minecraft'
 
-default['minecraft']['url']                 = 'https://s3.amazonaws.com/Minecraft.Download/versions/1.8.8/minecraft_server.1.8.8.jar'
-default['minecraft']['checksum']            = '39aef720dc5309476f56f2e96a516f3dd3041bbbf442cbfd47d63acbd06af31e'
-default['minecraft']['server_opts']         = 'nogui'
+# Currently vanilla, bukkit, spigot
+default['minecraft']['install_type']        = 'vanilla'
+
+case node['minecraft']['install_type']
+when 'vanilla'
+  default['minecraft']['url']                 = 'https://s3.amazonaws.com/Minecraft.Download/versions/1.8.8/minecraft_server.1.8.8.jar'
+  default['minecraft']['checksum']            = '39aef720dc5309476f56f2e96a516f3dd3041bbbf442cbfd47d63acbd06af31e'
+  default['minecraft']['server_opts']         = 'nogui'
+when 'bukkit'
+  default['minecraft']['url']                 = 'file://localhost/srv/spigot_build/craftbukkit-1.8.8.jar'
+  default['minecraft']['checksum']            = ''
+  default['minecraft']['server_opts']         = '--noconsole --online-mode true'
+when 'spigot'
+  default['minecraft']['url']                 = 'file://localhost/srv/spigot_build/spigot-1.8.8.jar'
+  default['minecraft']['checksum']            = ''
+  default['minecraft']['server_opts']         = ''
+end
 
 # Defaults to 40% of your total memory.
 default['minecraft']['xms']                 = "#{(node['memory']['total'].to_i * 0.4).floor / 1024}M"

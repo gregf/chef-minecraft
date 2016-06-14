@@ -31,9 +31,19 @@ directory node['minecraft']['install_dir'] do
   action :create
 end
 
+# If we're running either bukkit or spigot flavors, rather than vanilla, we need to build the code.
+case node['minecraft']['install_type']
+when 'vanilla'
+  include_recipe 'minecraft::vanilla'
+when 'bukkit'
+  include_recipe 'minecraft::build'
+when 'spigot'
+  include_recipe 'minecraft::build'
+end
+
 remote_file "#{node['minecraft']['install_dir']}/#{jar_name}" do
   source node['minecraft']['url']
-  checksum node['minecraft']['checksum']
+  # checksum node['minecraft']['checksum']
   owner node['minecraft']['user']
   group node['minecraft']['group']
   mode 0644
@@ -41,7 +51,7 @@ remote_file "#{node['minecraft']['install_dir']}/#{jar_name}" do
 end
 
 include_recipe 'minecraft::service'
-include_recipe 'minecraft::vanilla'
+include_recipe "minecraft::#{node['minecraft']['install_type']}"
 
 template "#{node['minecraft']['install_dir']}/server.properties" do
   owner node['minecraft']['user']

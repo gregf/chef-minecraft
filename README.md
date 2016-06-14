@@ -53,6 +53,9 @@ The service recipe enables the runit service for minecraft.
 * `minecraft['install_dir']`
   - The default location minecraft is installed to, default `/srv/minecraft`
 
+* `minecraft['install_type']`
+  - Supports 'vanilla' and 'bukkit' and 'spigot', default 'vanilla'
+
 * `minecraft['url']`
   - The url to fetch minecarft releases from, default `https://s3.amazonaws.com/Minecraft.Download/versions`
 
