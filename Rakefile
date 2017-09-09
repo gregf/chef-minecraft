@@ -11,9 +11,6 @@ end
 # Cookbook Releases
 Stove::RakeTask.new
 
-desc 'Run all style checks'
-task style: ['style:chef', 'style:ruby']
-
 # Rspec and ChefSpec
 desc 'Run ChefSpec examples'
 RSpec::Core::RakeTask.new(:spec)
@@ -30,7 +27,7 @@ namespace :integration do
 end
 
 desc 'Run all tests on Travis'
-task travis: %w(style spec)
+task travis: %w(rubocop spec)
 
 # Default
-task default: ['style', 'spec', 'integration:digitalocean']
+task default: ['rubocop', 'spec', 'integration:digitalocean']
