@@ -7,7 +7,7 @@ version           '0.6.0'
 name              'minecraft'
 issues_url 'https://github.com/gregf/chef-minecraft/issues'
 source_url        'https://github.com/gregf/chef-minecraft/'
-chef_version      '13.2'
+chef_version      '>= 13'
 
 recipe 'minecraft', 'Installs and configures minecraft server.'
 
