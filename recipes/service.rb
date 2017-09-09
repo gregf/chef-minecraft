@@ -31,8 +31,8 @@ when 'runit'
       group: node['minecraft']['group'],
       java_opts: node['minecraft']['java-options'],
       server_opts: node['minecraft']['server_opts'],
-      jar_name: minecraft_file(node['minecraft']['url'])
+      jar_name: minecraft_file(node['minecraft']['url']),
     }.merge(params))
-    action %i[enable start]
+    action %i(enable start)
   end
 end

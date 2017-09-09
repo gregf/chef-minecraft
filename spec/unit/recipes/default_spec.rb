@@ -4,10 +4,10 @@ describe 'minecraft::default' do
   context 'install minecraft defaults' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'debian', version: '9.0') do |node|
-        node.override['minecraft']['ops'] = %w[gregf sandal82]
-        node.override['minecraft']['banned-ips'] = %w[10.1.2.3 10.1.100.10]
-        node.override['minecraft']['banned-players'] = %w[gregf sandal82]
-        node.override['minecraft']['white-list'] = %w[gregf sandal82]
+        node.override['minecraft']['ops'] = %w(gregf sandal82)
+        node.override['minecraft']['banned-ips'] = %w(10.1.2.3 10.1.100.10)
+        node.override['minecraft']['banned-players'] = %w(gregf sandal82)
+        node.override['minecraft']['white-list'] = %w(gregf sandal82)
         node.automatic['memory']['total'] = '2097152kB'
       end.converge(described_recipe)
     end
