@@ -40,7 +40,7 @@ namespace :integration do
 end
 
 desc 'Run all tests on Travis'
-task travis: %w(style spec)
+task travis: %w[style spec]
 
 # Default
 task default: ['style', 'spec', 'integration:digitalocean']
