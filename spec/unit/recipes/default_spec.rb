@@ -3,11 +3,11 @@ require 'spec_helper'
 describe 'minecraft::default' do
   context 'install minecraft defaults' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(:platform => 'debian', :version => '7.0') do |node|
-        node.set['minecraft']['ops'] = %w(gregf sandal82)
-        node.set['minecraft']['banned-ips'] = %w(10.1.2.3 10.1.100.10)
-        node.set['minecraft']['banned-players'] = %w(gregf sandal82)
-        node.set['minecraft']['white-list'] = %w(gregf sandal82)
+      ChefSpec::SoloRunner.new(platform: 'debian', version: '9.0') do |node|
+        node.override['minecraft']['ops'] = %w[gregf sandal82]
+        node.override['minecraft']['banned-ips'] = %w[10.1.2.3 10.1.100.10]
+        node.override['minecraft']['banned-players'] = %w[gregf sandal82]
+        node.override['minecraft']['white-list'] = %w[gregf sandal82]
         node.automatic['memory']['total'] = '2097152kB'
       end.converge(described_recipe)
     end
@@ -25,7 +25,7 @@ describe 'minecraft::default' do
       expect(chef_run).to create_remote_file_if_missing(minecraft_jar).with(
         owner: 'mcserver',
         group: 'mcserver',
-        mode: 0644
+        mode: 0o644
       )
     end
 
@@ -33,7 +33,7 @@ describe 'minecraft::default' do
       expect(chef_run).to create_directory('/srv/minecraft').with(
         user: 'mcserver',
         group: 'mcserver',
-        mode: 0755,
+        mode: 0o755,
         recursive: true
       )
     end
@@ -51,7 +51,7 @@ describe 'minecraft::default' do
       end
 
       it 'has 0644 permissions' do
-        expect(template.mode).to eq(0644)
+        expect(template.mode).to eq(0o644)
       end
     end
 
@@ -68,7 +68,7 @@ describe 'minecraft::default' do
       end
 
       it 'has 0644 permissions' do
-        expect(ops.mode).to eq(0644)
+        expect(ops.mode).to eq(0o644)
       end
     end
 
@@ -85,7 +85,7 @@ describe 'minecraft::default' do
       end
 
       it 'has 0644 permissions' do
-        expect(banned_ips.mode).to eq(0644)
+        expect(banned_ips.mode).to eq(0o644)
       end
     end
 
@@ -102,7 +102,7 @@ describe 'minecraft::default' do
       end
 
       it 'has 0644 permissions' do
-        expect(banned_players.mode).to eq(0644)
+        expect(banned_players.mode).to eq(0o644)
       end
     end
 
@@ -119,7 +119,7 @@ describe 'minecraft::default' do
       end
 
       it 'has 0644 permissions' do
-        expect(white_list.mode).to eq(0644)
+        expect(white_list.mode).to eq(0o644)
       end
     end
 
