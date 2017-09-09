@@ -17,6 +17,7 @@
 # limitations under the License.
 #
 
+node.override['java']['jdk_version'] = '8'
 include_recipe 'java'
 include_recipe 'runit'
 include_recipe 'minecraft::user'
@@ -27,7 +28,7 @@ directory node['minecraft']['install_dir'] do
   recursive true
   owner node['minecraft']['user']
   group node['minecraft']['group']
-  mode 0755
+  mode 0o755
   action :create
 end
 
@@ -36,7 +37,7 @@ remote_file "#{node['minecraft']['install_dir']}/#{jar_name}" do
   checksum node['minecraft']['checksum']
   owner node['minecraft']['user']
   group node['minecraft']['group']
-  mode 0644
+  mode 0o644
   action :create_if_missing
 end
 
@@ -46,16 +47,16 @@ include_recipe 'minecraft::vanilla'
 template "#{node['minecraft']['install_dir']}/server.properties" do
   owner node['minecraft']['user']
   group node['minecraft']['group']
-  mode 0644
+  mode 0o644
   action :create
   notifies :restart, 'runit_service[minecraft]', :delayed if node['minecraft']['autorestart']
 end
 
-%w(ops banned-ips banned-players white-list).each do |f|
+%w[ops banned-ips banned-players white-list].each do |f|
   file "#{node['minecraft']['install_dir']}/#{f}.txt" do
     owner node['minecraft']['user']
     group node['minecraft']['group']
-    mode 0644
+    mode 0o644
     action :create
     content node['minecraft'][f].join("\n") + "\n"
     notifies :restart, 'runit_service[minecraft]', :delayed if node['minecraft']['autorestart']
@@ -64,7 +65,7 @@ end
 
 file "#{node['minecraft']['install_dir']}/eula.txt" do
   content "eula=#{node['minecraft']['accept_eula']}\n"
-  mode 0644
+  mode 0o644
   action :create
   notifies :restart, 'runit_service[minecraft]', :delayed if node['minecraft']['autorestart']
 end
