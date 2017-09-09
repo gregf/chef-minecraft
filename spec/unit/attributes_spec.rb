@@ -19,7 +19,7 @@ describe 'minecraft attributes' do
     end
 
     it 'has a url' do
-      expect(minecraft['url']).to match(/http.+minecraft_server.\d.\d.\d.jar/)
+      expect(minecraft['url']).to match(/http.+[minecraft_server].\d+.\d+.\d+.jar/)
     end
 
     it 'has contains a valid checksum' do
