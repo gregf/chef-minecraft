@@ -1,18 +1,21 @@
 source 'https://rubygems.org'
 
 group :lint do
-  gem 'foodcritic', '~> 5.0'
-  gem 'rubocop', '~> 0.34'
-  gem 'rainbow', '< 2.0'
+  gem 'cookstyle', '~> 2.1'
+  gem 'foodcritic', '~> 11.3'
+  gem 'rainbow', '< 2.1'
 end
 
 group :unit do
-  gem 'berkshelf', '~> 4.0'
-  gem 'chefspec', '~> 4.4'
+  gem 'berkshelf', '~> 6.3'
+  gem 'chefspec', '~> 7.1'
 end
 
 group :kitchen_common do
-  gem 'test-kitchen', '~> 1.4'
+  gem 'test-kitchen', '~> 1.17'
+  gem 'rbnacl', '~> 3.2'
+  gem 'rbnacl-libsodium'
+  gem 'bcrypt_pbkdf', '< 2.0'
 end
 
 group :kitchen_cloud do
@@ -21,5 +24,5 @@ end
 
 group :development do
   gem 'rake'
-  gem 'stove', '~> 3.2'
+  gem 'stove', '~> 5.2'
 end
